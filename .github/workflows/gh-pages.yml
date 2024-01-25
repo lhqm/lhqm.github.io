@@ -30,7 +30,7 @@ jobs:
         run: npm i
 
       - name: 🌌 Build Valaxy Blog
-        run: npm run build:spa
+        run: npm run build
 
       - name: 🪤 Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
