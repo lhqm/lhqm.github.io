@@ -1,0 +1,38 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "狐狸小窝",
+    "home_page_url": "https://valaxy.site/",
+    "feed_url": "https://valaxy.site/feed.json",
+    "description": "三元及第才千倾，一品当朝禄万钟。",
+    "icon": "https://valaxy.site/fox.jpg",
+    "author": {
+        "name": "离狐千慕",
+        "url": "https://valaxy.site"
+    },
+    "items": [
+        {
+            "id": "",
+            "content_html": "<h1>Java&amp;Kotlin混编与API迁移规范文档</h1>\n<p>[[TOC]]</p>\n<h2>迁移规范</h2>\n<h3>通俗约定</h3>\n<p>目标迁移语言：<code>kotlin</code></p>\n<p>目标迁移API范围：<code>Java线程池</code>、`大数据集操作</p>\n",
+            "url": "https://valaxy.site/posts/jk/kotlin-Java混合开发与迁移",
+            "title": "Java迁移J&K混合开发",
+            "date_modified": "2023-11-02T00:00:00.000Z",
+            "date_published": "2023-11-02T00:00:00.000Z",
+            "author": {
+                "name": "离狐千慕",
+                "url": "https://valaxy.site"
+            }
+        },
+        {
+            "id": "",
+            "content_html": "<h2>为什么选择 Valaxy</h2>\n<p>因为我懒)</p>\n<h2>有啥用</h2>\n<p>就像学术垃圾得有个知网来装，我的垃圾产出也得有个地方放不是）</p>\n<h2>官网地址</h2>\n<blockquote>\n<p>哼，只是我存档用的，才不是为你方便而准备的呢！<br>\n[</p>\n</blockquote>\n",
+            "url": "https://valaxy.site/posts/hello-valaxy",
+            "title": "Valaxy，我来了!",
+            "date_modified": "2023-09-01T00:00:00.000Z",
+            "date_published": "2023-09-01T00:00:00.000Z",
+            "author": {
+                "name": "离狐千慕",
+                "url": "https://valaxy.site"
+            }
+        }
+    ]
+}
