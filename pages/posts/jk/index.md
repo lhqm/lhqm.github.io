@@ -5,8 +5,8 @@ updated: 2023-11-02
 categories: 笔记
 codeHeightLimit: 400
 tags:
-- Java
-- Kotlin
+  - Java
+  - Kotlin
 ---
 
 # Java&Kotlin混编与API迁移规范文档
@@ -39,74 +39,72 @@ tags:
 ### Maven坐标与混合编译支持
 
 ```xml
-        <dependencies>
  			<!-- kotlin反射基础库 -->
-            <dependency>
-                <groupId>org.jetbrains.kotlin</groupId>
-                <artifactId>kotlin-reflect</artifactId>
-                <version>${kotlin.version}</version>
-            </dependency>
-            <!--kotlin基础标准语法库-->
-            <dependency>
-                <groupId>org.jetbrains.kotlin</groupId>
-                <artifactId>kotlin-stdlib-jdk8</artifactId>
-                <version>${kotlin.version}</version>
-            </dependency>
-            <!--kotlin协程Jdk标准库-->
-            <dependency>
-                <groupId>org.jetbrains.kotlinx</groupId>
-                <artifactId>kotlinx-coroutines-jdk8</artifactId>
-            </dependency>
-            <!--kotlin协程核心库-->
-            <dependency>
-                <groupId>org.jetbrains.kotlinx</groupId>
-                <artifactId>kotlinx-coroutines-core</artifactId>
-            </dependency>
-            <!--kotlin、Java混合编译依赖-->
-            <dependency>
-                <groupId>com.fasterxml.jackson.module</groupId>
-                <artifactId>jackson-module-kotlin</artifactId>
-            </dependency>
-        </dependencies>
+<dependency>
+  <groupId>org.jetbrains.kotlin</groupId>
+  <artifactId>kotlin-reflect</artifactId>
+  <version>${kotlin.version}</version>
+</dependency>
+  <!--kotlin基础标准语法库-->
+<dependency>
+<groupId>org.jetbrains.kotlin</groupId>
+<artifactId>kotlin-stdlib-jdk8</artifactId>
+<version>${kotlin.version}</version>
+</dependency>
+  <!--kotlin协程Jdk标准库-->
+<dependency>
+<groupId>org.jetbrains.kotlinx</groupId>
+<artifactId>kotlinx-coroutines-jdk8</artifactId>
+</dependency>
+  <!--kotlin协程核心库-->
+<dependency>
+<groupId>org.jetbrains.kotlinx</groupId>
+<artifactId>kotlinx-coroutines-core</artifactId>
+</dependency>
+  <!--kotlin、Java混合编译依赖-->
+<dependency>
+<groupId>com.fasterxml.jackson.module</groupId>
+<artifactId>jackson-module-kotlin</artifactId>
+</dependency>
 ```
 
 ### Maven插件与spring支持
 
 ```xml
 		<plugin>
-                <groupId>org.jetbrains.kotlin</groupId>
-                <artifactId>kotlin-maven-plugin</artifactId>
-                <version>${kotlin.version}</version>
-                <configuration>
-                    <jvmTarget>1.8</jvmTarget>
-                    <args>
-                        <arg>-Xjsr305=strict</arg>
-                    </args>
-                    <compilerPlugins>
-                        <!-- Spring使用动态代理需要所有Bean可继承，该插件为所有Bean添加open关键字 -->
-                        <plugin>spring</plugin>
-                        <!-- 该插件为jpa实体类解决没有无参构造器的问题 -->
-                        <!-- <plugin>jpa</plugin> -->
-                        <plugin>no-arg</plugin>
-                    </compilerPlugins>
-                    <pluginOptions>
- <!-- 有些持久层框架需要实体类需要无参构造器，使用该注解标注解决kotlin data class没有无参构造器的问题 -->
-                        <option>no-arg:annotation=com.example.annotations.NoArg</option>
-                    </pluginOptions>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.jetbrains.kotlin</groupId>
-                        <artifactId>kotlin-maven-allopen</artifactId>
-                        <version>${kotlin.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.jetbrains.kotlin</groupId>
-                        <artifactId>kotlin-maven-noarg</artifactId>
-                        <version>${kotlin.version}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
+  <groupId>org.jetbrains.kotlin</groupId>
+  <artifactId>kotlin-maven-plugin</artifactId>
+  <version>${kotlin.version}</version>
+  <configuration>
+    <jvmTarget>1.8</jvmTarget>
+    <args>
+      <arg>-Xjsr305=strict</arg>
+    </args>
+    <compilerPlugins>
+      <!-- Spring使用动态代理需要所有Bean可继承，该插件为所有Bean添加open关键字 -->
+      <plugin>spring</plugin>
+      <!-- 该插件为jpa实体类解决没有无参构造器的问题 -->
+      <!-- <plugin>jpa</plugin> -->
+      <plugin>no-arg</plugin>
+    </compilerPlugins>
+    <pluginOptions>
+      <!-- 有些持久层框架需要实体类需要无参构造器，使用该注解标注解决kotlin data class没有无参构造器的问题 -->
+      <option>no-arg:annotation=com.example.annotations.NoArg</option>
+    </pluginOptions>
+  </configuration>
+  <dependencies>
+    <dependency>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <artifactId>kotlin-maven-allopen</artifactId>
+      <version>${kotlin.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <artifactId>kotlin-maven-noarg</artifactId>
+      <version>${kotlin.version}</version>
+    </dependency>
+  </dependencies>
+</plugin>
 ```
 
 
@@ -164,66 +162,66 @@ kotlin中变量声明格式为
 
 1. 类型推断：
 
-   - Kotlin：Kotlin具有类型推断的功能，可以根据变量的初始值自动推断出其类型，而无需显式指定类型。例如：`val name = "John"`。
-   - Java：Java中变量的类型必须显式指定，例如：`String name = "John";`。
+  - Kotlin：Kotlin具有类型推断的功能，可以根据变量的初始值自动推断出其类型，而无需显式指定类型。例如：`val name = "John"`。
+  - Java：Java中变量的类型必须显式指定，例如：`String name = "John";`。
 
 2. 可变性：
 
-   - Kotlin：Kotlin的变量默认是不可变的，使用关键字 `val` 声明。如果需要可变的变量，需要使用关键字 `var` 声明。例如：`val age = 25`，`var count = 0`。
-   - Java：Java的变量可通过使用关键字 `final` 来声明为不可变，使用关键字 `var` 声明为可变。例如：`final int age = 25;`，`int count = 0;`。
+  - Kotlin：Kotlin的变量默认是不可变的，使用关键字 `val` 声明。如果需要可变的变量，需要使用关键字 `var` 声明。例如：`val age = 25`，`var count = 0`。
+  - Java：Java的变量可通过使用关键字 `final` 来声明为不可变，使用关键字 `var` 声明为可变。例如：`final int age = 25;`，`int count = 0;`。
 
 3. 默认值：
 
-   - Kotlin：在Kotlin中，如果一个变量使用 `var` 声明，并且没有被初始化，那么它会被自动赋予一个默认值。例如，`var x: Int` 的默认值是0，`var y: String?` 的默认值是`null`。
-   - Java：在Java中，如果一个变量没有被初始化，它没有一个明确的默认值，而是需要手动初始化变量。
+  - Kotlin：在Kotlin中，如果一个变量使用 `var` 声明，并且没有被初始化，那么它会被自动赋予一个默认值。例如，`var x: Int` 的默认值是0，`var y: String?` 的默认值是`null`。
+  - Java：在Java中，如果一个变量没有被初始化，它没有一个明确的默认值，而是需要手动初始化变量。
 
 4. null 安全：
 
-   - Kotlin：Kotlin在类型系统中引入了对 null 安全的支持。在Kotlin中，默认情况下，变量是不可为 null 的，即非空类型。如果允许变量为 null，则需要使用可为空类型，使用 `?` 后缀进行标记。例如：`val name: String? = null`。
-   - Java：在Java中，变量默认是可为 null 的，即可以接受 null 值。如果不希望接受 null 值，可以使用注解 `@NonNull` 或 `@NotNull` 进行标记。
+  - Kotlin：Kotlin在类型系统中引入了对 null 安全的支持。在Kotlin中，默认情况下，变量是不可为 null 的，即非空类型。如果允许变量为 null，则需要使用可为空类型，使用 `?` 后缀进行标记。例如：`val name: String? = null`。
+  - Java：在Java中，变量默认是可为 null 的，即可以接受 null 值。如果不希望接受 null 值，可以使用注解 `@NonNull` 或 `@NotNull` 进行标记。
 
 5. 引入包：
 
-   - Kotlin：Kotlin可以自动识别并导入需要的包，无需显式导入。例如，可以直接使用 `java.util.List`，而无需显式导入该包。
-   - Java：Java需要显式导入使用的包，例如 `import java.util.List;`。
+  - Kotlin：Kotlin可以自动识别并导入需要的包，无需显式导入。例如，可以直接使用 `java.util.List`，而无需显式导入该包。
+  - Java：Java需要显式导入使用的包，例如 `import java.util.List;`。
 
 #### 遍历方法
 
 1. for 循环：
 
-   - Kotlin：在Kotlin中，for 循环被称为“区间遍历”，可以使用 `..` 运算符来定义一个区间。例如：`for (i in 1..5)`
+  - Kotlin：在Kotlin中，for 循环被称为“区间遍历”，可以使用 `..` 运算符来定义一个区间。例如：`for (i in 1..5)`
 
-   - Java：在Java中，for 循环主要使用条件判断和递增操作，例如：`for (int i = 1; i <= 5; i++)`
+  - Java：在Java中，for 循环主要使用条件判断和递增操作，例如：`for (int i = 1; i <= 5; i++)`
 
-     如果要在kotlin中进行下表遍历，需要借助`indices`:
+    如果要在kotlin中进行下表遍历，需要借助`indices`:
 
-     ```kotlin
-     val str = "Hello"
+    ```kotlin
+    val str = "Hello"
 
-     for (index in str.indices) {
-         val char = str[index]
-         println("Character at index $index is $char")
-     }
-     ```
+    for (index in str.indices) {
+        val char = str[index]
+        println("Character at index $index is $char")
+    }
+    ```
 
 2. 遍历集合：
 
-   - Kotlin：在Kotlin中，遍历集合可以使用 `for...in` 循环结构。例如：`for (item in list)`
-   - Java：在Java中，遍历集合可以使用增强型的 for 循环或迭代器。例如：`for (String item : list)` 或使用 `Iterator` 进行遍历。
+  - Kotlin：在Kotlin中，遍历集合可以使用 `for...in` 循环结构。例如：`for (item in list)`
+  - Java：在Java中，遍历集合可以使用增强型的 for 循环或迭代器。例如：`for (String item : list)` 或使用 `Iterator` 进行遍历。
 
 3. while 和 do…while 循环：
 
-   - Kotlin：Kotlin中的 while 和 do…while 循环与Java类似，使用关键字 `while` 和 `do...while` 进行定义。
-   - Java：Java中的 while 和 do…while 循环的用法与Kotlin类似，使用关键字 `while` 和 `do...while` 进行定义。
+  - Kotlin：Kotlin中的 while 和 do…while 循环与Java类似，使用关键字 `while` 和 `do...while` 进行定义。
+  - Java：Java中的 while 和 do…while 循环的用法与Kotlin类似，使用关键字 `while` 和 `do...while` 进行定义。
 
 #### 方法声明
 
 1. 方法声明和参数列表：
-   - Kotlin：Kotlin中方法的声明与Java类似，但有一些差异。在Kotlin中，方法声明使用关键字 `fun`，参数列表的声明方式也略有不同。参数的声明方式是“参数名: 参数类型”，参数之间使用逗号分隔。例如：`fun add(a: Int, b: Int)`
-   - Java：在Java中，方法的声明方式使用关键字 `public` 或其他访问修饰符，后跟返回值类型和方法名，参数列表用括号括起来。例如：`public int add(int a, int b)`
+  - Kotlin：Kotlin中方法的声明与Java类似，但有一些差异。在Kotlin中，方法声明使用关键字 `fun`，参数列表的声明方式也略有不同。参数的声明方式是“参数名: 参数类型”，参数之间使用逗号分隔。例如：`fun add(a: Int, b: Int)`
+  - Java：在Java中，方法的声明方式使用关键字 `public` 或其他访问修饰符，后跟返回值类型和方法名，参数列表用括号括起来。例如：`public int add(int a, int b)`
 2. 返回值类型：
-   - Kotlin：在Kotlin中，方法的返回值类型位于方法名之后，使用冒号 `:` 进行标记。例如：`fun add(a: Int, b: Int): Int`
-   - Java：在Java中，方法的返回值类型位于方法名之前，使用关键字表示。例如：`public int add(int a, int b)`
+  - Kotlin：在Kotlin中，方法的返回值类型位于方法名之后，使用冒号 `:` 进行标记。例如：`fun add(a: Int, b: Int): Int`
+  - Java：在Java中，方法的返回值类型位于方法名之前，使用关键字表示。例如：`public int add(int a, int b)`
 
 需要注意的是，Kotlin与Java之间在方法声明和返回值定义方面的差异不会影响两种语言之间的互操作。
 
@@ -264,9 +262,9 @@ Java代码：
 
 ```java
 public class HelloWorld {
-    public static void main(String[] args) {
-        System.out.println("Hello, World!");
-    }
+  public static void main(String[] args) {
+    System.out.println("Hello, World!");
+  }
 }
 ```
 
@@ -401,7 +399,7 @@ open class Demo {
 
 <u>挂起函数</u>的调用范围：
 
- 只有在协程代码块（包括协程构建器如`launch`、`async`等）或其他挂起函数内部才能调用标记为`suspend`的挂起函数。在普通的同步代码中，不能直接调用挂起函数。
+只有在协程代码块（包括协程构建器如`launch`、`async`等）或其他挂起函数内部才能调用标记为`suspend`的挂起函数。在普通的同步代码中，不能直接调用挂起函数。
 
 如下所示，展示一个`挂起函数`和一个`调用挂起函数`的例子
 
@@ -452,7 +450,7 @@ Kotlin 协程提供了几种内置的调度器，常用的包括以下几种：
 
 #### 调度器
 
- 使用 `withContext()` 函数切换协程的调度器。例如，在进行 I/O 操作时，可以使用 `Dispatchers.IO` 调度器来确保在单独的线程池中执行耗时的操作。
+使用 `withContext()` 函数切换协程的调度器。例如，在进行 I/O 操作时，可以使用 `Dispatchers.IO` 调度器来确保在单独的线程池中执行耗时的操作。
 
 #### 异常处理
 
@@ -460,7 +458,7 @@ Kotlin 协程提供了几种内置的调度器，常用的包括以下几种：
 
 #### 协程的取消和内存泄漏问题的规避
 
- 使用 `CoroutineScope` 提供的 `cancel()` 方法来取消协程的执行。在 Spring Boot 中，可以利用 Bean 的生命周期或请求处理等机制，在适当的时候取消协程的执行，避免潜在的资源泄漏。以及不使用`global`挂起协程。
+使用 `CoroutineScope` 提供的 `cancel()` 方法来取消协程的执行。在 Spring Boot 中，可以利用 Bean 的生命周期或请求处理等机制，在适当的时候取消协程的执行，避免潜在的资源泄漏。以及不使用`global`挂起协程。
 
 ## 目前已有的迁移封装
 
@@ -640,11 +638,11 @@ open class CoroutinesUtil {
 
 ```java
 public class InvokeTarget {
-    public String getApiData(Integer sequenceId,String areaCode) throws InterruptedException {
-        System.out.println(sequenceId+" of index inherited method");
-        Thread.sleep(500);
-        return sequenceId+":"+areaCode;
-    }
+  public String getApiData(Integer sequenceId,String areaCode) throws InterruptedException {
+    System.out.println(sequenceId+" of index inherited method");
+    Thread.sleep(500);
+    return sequenceId+":"+areaCode;
+  }
 }
 ```
 
@@ -655,27 +653,26 @@ import java.lang.reflect.Method;
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws NoSuchMethodException {
-        long l = System.currentTimeMillis();
+  public static void main(String[] args) throws NoSuchMethodException {
+    long l = System.currentTimeMillis();
 //        获取class对象
-        Class<InvokeTarget> targetClass = InvokeTarget.class;
+    Class<InvokeTarget> targetClass = InvokeTarget.class;
 //        获取到方法或被重载的方法
-        Method method = targetClass.getMethod("getApiData", Integer.class, String.class);
+    Method method = targetClass.getMethod("getApiData", Integer.class, String.class);
 //        添加参数
-        Object[] objects =new Object[]{"A0"};
+    Object[] objects =new Object[]{"A0"};
 //        添加要被循环执行任务的列表
-        LinkedList<Integer> linkedList = new LinkedList<>(
+    LinkedList<Integer> linkedList = new LinkedList<>(
 //                Arrays.asList(1, 2, 3, 4, 5,6,7,8,9,10,null)
-        );
-        for (int i = 0; i < 1500; i++) {
-            linkedList.add(i);
-        }
+    );
+    for (int i = 0; i < 1500; i++) {
+      linkedList.add(i);
+    }
 //        调用封装后的kotlin代码，传入循环列表、形参列表、方法体、class对象（实际上还要指定循环的数据所在参数列表的位置，默认为第一个）
-        List<Object> list = CoroutinesUtil.invokeJavaMethod(objects,linkedList,method,targetClass);
+    List<Object> list = CoroutinesUtil.invokeJavaMethod(objects,linkedList,method,targetClass);
 //        查看调用结果
 //        list.forEach(System.out::println);
-        System.out.println(System.currentTimeMillis()-l+"ms");
-    }
+    System.out.println(System.currentTimeMillis()-l+"ms");
+  }
 }
 ```
-
