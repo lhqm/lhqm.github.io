@@ -1,12 +1,16 @@
 import { defineSiteConfig } from 'valaxy'
 
 export default defineSiteConfig({
-  url: 'http://localhost:4859/',
+  url: 'https://lhqm.github.io/',
   lang: 'zh-CN',
   title: '狐狸小窝',
   author: {
     avatar: '/fox.jpg',
     name: '离狐千慕',
+    status: {
+      emoji: '🥇',
+      message: '这个烂崽不知道从哪偷的'
+    }
   },
   favicon:"favicon.ico",
   subtitle:'木秀于林，风必摧之',
