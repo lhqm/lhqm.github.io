@@ -7,8 +7,6 @@ deploy.sh
 
 .vite-ssg-dist
 .vite-ssg-temp
-dist
-
 temp/
 
 .DS_Store
@@ -28,3 +26,4 @@ public/atom.xml
 
 # valaxy rss
 public/feed.json
+/dist/

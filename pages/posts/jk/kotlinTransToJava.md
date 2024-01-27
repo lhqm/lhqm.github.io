@@ -39,6 +39,7 @@ tags:
 ### Maven坐标与混合编译支持
 
 ```xml
+        <dependencies>
  			<!-- kotlin反射基础库 -->
             <dependency>
                 <groupId>org.jetbrains.kotlin</groupId>
@@ -66,6 +67,7 @@ tags:
                 <groupId>com.fasterxml.jackson.module</groupId>
                 <artifactId>jackson-module-kotlin</artifactId>
             </dependency>
+        </dependencies>
 ```
 
 ### Maven插件与spring支持

@@ -1,7 +1,7 @@
 import { defineSiteConfig } from 'valaxy'
 
 export default defineSiteConfig({
-  url: 'https://valaxy.site/',
+  url: 'http://localhost:4859/',
   lang: 'zh-CN',
   title: '狐狸小窝',
   author: {
@@ -130,8 +130,7 @@ export default defineSiteConfig({
   frontmatter:{
     //古早文章提示
     time_warning: true,
-    toc: true,
-    draft: true
+    toc: true
   },
   //代码块最大高度
   codeHeightLimit: 300,
