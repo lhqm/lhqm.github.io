@@ -1,1 +1,14 @@
 // you can custom css here
+
+.markdown-body{
+  code{
+    color: white;
+    //font-weight: bold;
+    background-color: rgba(10, 138, 229, 0.45);
+  }
+  blockquote{
+    border-color: #4f6de5;
+    border-radius: 2px;
+    background-color: rgba(4, 93, 121, 0.15);
+  }
+}
