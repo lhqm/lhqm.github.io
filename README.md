@@ -1,51 +1,29 @@
-# create-valaxy
+## 感谢光顾
 
-Example: [valaxy.site](https://valaxy.site)
+本站由`valaxy`驱动，仓库地址：[valaxy](https://github.com/YunYouJun/valaxy),官网地址：[vlaxy.site](https://valaxy.site/),感谢[云游君](https://github.com/YunYouJun)的无私开源与付出！
 
-## Usage
+## 站点内容
 
-```bash
-# install
-npm i
-# or pnpm i
+静态站主要提供包括但不限于`个人分享`、`项目分析`、`开源学习`、`相关文档解读`、`学习心得`。
 
-# start
-npm run dev
-# or pnpm dev
-```
+针对具体的分类，提供更加密集且紧要的关键词，~~当然，里边也有可能有我的废话。~~
 
-See `http://localhost:4859/`, have fun!
+## 你将看到
 
-### Config
+包括但不限于：
 
-Modify `valaxy.config.ts` to custom your blog.
+- 发癫狐
+- 知识分享狐
+- 开源狐
+- 憨批狐
+- emo狐
+- 自黑狐
+- 底层狐（各种意义）
+- 高强度冲浪狐
+- 有用狐
+- kemomimi
+- 八重神子
+- 白上吹雪
+- 额，反正就是各种狐就完事了！
 
-English & Chinese Docs is coming!
-
-> Wait a minute.
-
-### Docker
-
-```bash
-docker build . -t your-valaxy-blog-name:latest
-```
-
-## Structure
-
-In most cases, you only need to work in the `pages` folder.
-
-### Main folders
-
-- `pages`: your all pages
-  - `posts`: write your posts here, will be counted as posts
-- `styles`: override theme styles, `index.scss`/`vars.csss`/`index.css` will be loaded automatically
-- `components`: custom your vue components (will be loaded automatically)
-- `layouts`: custom layouts (use it by `layout: xxx` in md)
-- `locales`: custom i18n
-
-### Other
-
-- `.vscode`: recommend some useful plugins & settings, you can preview icon/i18n/class...
-- `.github`: GitHub Actions to auto build & deploy to GitHub Pages
-- `netlify.toml`: for [netlify](https://www.netlify.com/)
-- `vercel.json`: for [vercel](https://vercel.com/)
+好吧，就这样！哪天又想更新readme了再说！
