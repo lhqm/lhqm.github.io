@@ -1,241 +1,252 @@
 ---
 title: matlab代码解释
 date: 2024-02-02
-updated: 2024-02-02
+updated: 2024-02-15
 categories: matlab
 codeHeightLimit: 400
 tags:
 - matlab
 - 编程
 ---
-## 源代码
+## MATLAB程序逐行比对解释
+### RLrec.m
 ```matlab
-function [pix4,er4] = readdata(num,ladd,oname)
-%readdata 函数 用于读取mcnp输出卡的FIR卡数据 mcnp5专用
-%num   成像卡阶数
-%ladd  文件首行到数据首行预估行数
-%oname 读取的输出卡文件名
-%pix4  输出成像卡矩阵
-%er4   输出方差矩阵
-%   此处显示详细说明
-str={};
-string1={};
-string2={};
-len='1tally  15        nps =';%寻找标识
-lfir=0;                       %数据首行行数
-cc=1;
-dd=1;
-pix=[];   %图像数据
-er=[];    %方差数据
-%num=n;    %成像卡阶数
-%ladd=1000;  %文件首行到数据首行预估行数
-fid1=fopen(oname,'rt');      %读出数据文件
-%fid2=fopen('data.txt','w');  %写入文本文件
-while cc<=(4*num*num+ladd)   %读入数据文件行
- line=fgets(fid1);
- str{cc}=line;
-  cc=cc+1;
-  if line<0
-       break
-  end
- % disp(line);
-end
-while dd<cc      %找到数据首行
-    string1=str{dd};
-    if length(string1)>=30
-       string2=string1(1:23);
-    end
-  if strcmp(string2,len)==1
-     lfir=dd+16;
-     ff=str{lfir};
-     break
-     end
-    dd=dd+1;
+-- 加载名为'dianpix.mat'的MATLAB数据文件，这个文件可能包含了图像数据。
+load('dianpix.mat');
+
+-- 使用tic和toc命令来测量代码块的执行时间。
+tic
+J=deconvlucy(g1,psf,63);
+toc;
+
+-- 使用deconvlucy函数进行Lucy-Richardson去卷积，其中g1是输入图像，psf是点扩散函数（PSF），63是迭代次数。
+-- 注释：这里假设g1和psf已经在之前的代码中定义。
+
+-- 计算去卷积后的图像J和原始图像g1的卷积，以验证去卷积过程。
+g1=g;
+g2=conv2(J,psf,'same');
+
+-- 计算去卷积误差，即原始图像与卷积后图像的差值。
+resid1=g1-g2;
+
+-- 计算误差的均方根（RMSE）。
+resid=sqrt(sum(sum(resid1.^2)))/norm(g1);
+
+-- 归一化去卷积后的图像J。
+x=J;
+x=x./max(max(x));
+
+-- 计算峰值信噪比（PSNR），这是一个衡量图像质量的指标。
+PSNR=10*log10((max(max(S)).*dem_source*dem_source)/sum(sum((x-S).^2)));
+
+-- RMSE的另一种计算方式，这里dem_source可能是图像的某个特定区域的像素值。
+RMSE=sqrt(sum(sum((x-S).^2))/(dem_source*dem_source));
+
+-- 创建一个2x2的图形窗口，用于显示四个不同的图像。
+figure;
+subplot(2,2,1);imagesc(S);axis image;colormap jet(256);title('S');
+-- 在第一个子图中显示图像S，这里S可能是去卷积前的图像。
+
+subplot(2,2,2);imagesc(g1);axis image;colormap jet(256);title('g1');
+-- 在第二个子图中显示原始图像g1。
+
+subplot(2,2,3);imagesc(x./max(max(x)));axis image;colormap jet(256);title('x./max(max(x))');
+-- 在第三个子图中显示归一化后的去卷积图像。
+
+subplot(2,2,4);imagesc(resid1);axis image;colormap jet(256);title('resid1');
+-- 在第四个子图中显示误差图像。
+
+-- 此外：这段代码没有结束，只是一个脚本的一部分，用于图像处理和分析。
+```
+> 这段代码中的`一些变量`（如g1, psf, S, dem_source）在这段代码中没有定义，它们应该是在之前的代码中定义的。此外，`deconvlucy`函数是MATLAB的一个`去卷积函数`，用于`图像处理`。这段代码的目的是`通过去卷积来提高图像质量，并计算去卷积前后的图像质量指标`。
+### TikhonovRec.m
+```matlab
+-- 清除当前工作空间的所有变量。
+clc;
+clear;
+
+-- 加载名为'initial_data.mat'的MATLAB数据文件，这个文件可能包含了初始数据。
+load('initial_data.mat');
+
+-- 开始计时。
+tic;
+
+-- 关闭所有打开的图形窗口。
+close all;
+
+-- 定义一些参数，这些参数可能用于后续的迭代算法。
+alpha=1e-4;
+delta=1;
+gamma=alpha;
+miu=2*sqrt(gamma*delta);
+tau=miu/(2*gamma);
+sigma=miu/(2*delta);
+theta=1/(1+miu); % [1/(1+miu),1]
+
+-- 设置迭代次数。
+num_iter=200;
+% num_iter=1; % 这里有一个注释掉的单次迭代设置。
+
+-- 初始化迭代过程中的变量。
+obj=zeros(num_iter,1);
+L2norm=zeros(num_iter,1);
+resids=zeros(num_iter,1);
+
+-- 开始迭代过程。
+for i=1:num_iter
+
+   -- 对当前估计值进行傅里叶变换。
+   Ax=my_FFT_AX(x_bar,psf);
+
+   -- 添加噪声。
+   temp1=y+(sigma)*Ax;
+
+   -- 对添加噪声的图像进行处理，这里'PF_star'可能是一个自定义函数。
+   y2= PF_star(temp1,g,sigma);
+
+   -- 对处理后的图像进行傅里叶变换。
+   ATy= my_FFT_ATX(y2,psf,dem_source);
+
+   -- 更新估计值。
+   temp2=x-tau*ATy;
+   x2=PG(temp2,tau,alpha);
+
+   -- 更新x_bar。
+   x_bar2=x2+theta*(x2-x);
+   x_bar=x_bar2;
+   x=x2;
+
+   -- 更新y。
+   y=y2;
+
+   -- 生成重建后的图像。
+   g1=g;
+   g2=conv2(x,psf,'same');
+
+   -- 计算重建误差。
+   resid1=g1-g2;
+   resid=sqrt(sum(sum(resid1.^2)))/norm(g1); % 图像归一均方差
+
+   -- 这里有一个注释掉的代码行，可能是用于显示均方差的。
+   % disp([num2str(i),'   ',num2str(resid)]);
+
 end
 
-for i=1:num*num   %读取数据并存储
-    x=str{i*4-2+lfir};
-    %fprintf(fid2,'%s\n',x);
-    pix=[pix x(17:28)];
-    er=[er x(29:35)];
+-- 结束计时。
+toc;
+
+-- 显示最终的估计值图像。
+figure; imagesc(x); axis image; colormap jet(256); title('x');
+
+-- 显示重建后的图像。
+figure; imagesc(g2); axis image; colormap jet(256); title('g2');
+
+-- 归一化估计值。
+x=x./max(max(x));
+
+-- 显示原始图像。
+S=source;
+figure;
+subplot(2,2,1); imagesc(S); axis image; colormap jet(256); title('S');
+
+-- 显示原始图像。
+subplot(2,2,2); imagesc(g1); axis image; colormap jet(256); title('g1');
+
+-- 显示归一化后的估计值。
+subplot(2,2,3); imagesc(x./max(max(x))); axis image; colormap jet(256); title('x./max(max(x))');
+
+-- 显示重建误差。
+subplot(2,2,4); imagesc(resid1); axis image; colormap jet(256); title('resid1');
+
+-- 注释：这段代码是一个迭代算法，用于图像重建，可能是Tikhonov正则化方法的一部分。代码中包含了一些自定义函数（如'my_FFT_AX', 'PF_star', 'my_FFT_ATX', 'PG'），这些函数的具体实现没有在代码中给出。
+```
+> 这段代码中的一些变量（如x0, x_bar0, y0, psf, g, dem_source, source）在这段代码中没有定义，它们应该是在`之前的代码`或`initial_data.mat`文件中定义的。
+
+### TVRe.m
+```matlab
+-- 定义一个名为TVRe的函数，用于执行总变分（Total Variation）正则化的图像重建。
+function [x] = TVRe(m,a,n,g,psf)
+% TVRe 函数用于执行总变分正则化的图像重建。
+% m 是图像的尺寸。
+% a 是正则化参数。
+% n 是迭代次数。
+% g 是观测数据。
+% psf 是点扩散函数（PSF）。
+
+-- 初始化一些参数，这些参数可能用于后续的迭代算法。
+dem_source=m; % 假设dem_source是图像的尺寸。
+x0=ones(size(psf)); % 初始化x0为与psf相同大小的全1矩阵。
+x_bar0=x0; % 初始化x_bar0为x0的副本。
+x=x0;   % 初始化当前估计值x为x0。
+x_bar=x_bar0;  % 初始化x_bar为x_bar0。
+y=0; % 初始化y为0矩阵。
+
+-- 设置迭代过程中的参数。
+alpha=a;    % 设置正则化参数alpha。
+delta=1; % 设置delta参数。
+gamma=alpha; % 设置gamma参数。
+miu=2*sqrt(gamma*delta);  % 设置miu参数。
+tau=miu/(2*gamma); % 设置tau参数。
+sigma=miu/(2*delta); % 设置sigma参数。
+theta=1/(1+miu); % 设置theta参数。
+
+-- 设置迭代次数。
+num_iter=n;  % 设置迭代次数n。
+% num_iter=1; % 这里有一个注释掉的单次迭代设置。
+
+-- 初始化迭代过程中的变量。
+obj=zeros(num_iter,1); % 初始化目标函数值数组。
+L2norm=zeros(num_iter,1); % 初始化L2范数数组。
+resids=zeros(num_iter,1); % 初始化残差数组。
+
+-- 开始迭代过程。
+for i=1:num_iter
+
+   -- 对当前估计值进行傅里叶变换。
+   Ax=my_FFT_AX(x_bar,psf);
+
+   -- 添加噪声。
+   temp1=y+(sigma)*Ax;
+
+   -- 对添加噪声的图像进行处理，这里'PF_star'可能是一个自定义函数。
+   y2= PF_star(temp1,g,sigma);
+
+   -- 对处理后的图像进行傅里叶变换。
+   ATy= my_FFT_ATX(y2,psf,dem_source);
+
+   -- 更新估计值。
+   temp2=x-tau*ATy;
+   x2=PG(temp2,tau,alpha);
+
+   -- 更新x_bar。
+   x_bar2=x2+theta*(x2-x);
+   x_bar=x_bar2;
+   x=x2;
+
+   -- 更新y。
+   y=y2;
+
 end
-pix1=str2num(pix);
-pix2=reshape(pix1,num,num);  %按列导成矩阵
-pix3=fliplr(pix2);           %矩阵按行反转
-pix4=pix3';                  %矩阵行列转置
-er1=str2num(er);
-er2=reshape(er1,num,num);
-er3=fliplr(er2);
-er4=er3';
-fclose(fid1);
-%fclose(fid2);
-%pname=sprintf('%spix.mat',oname);
-%ename=sprintf('%ser.mat',oname);
-%save(pname,'pix4');
-%save(ename,'er4');
-imagesc(pix4);
+
 end
 ```
-## 代码逐行解释
-这个MATLAB程序是一个用于读取MCNP（Monte Carlo N-Particle）输出文件中的FIR（First-Order Response）卡数据的函数。MCNP是一个用于模拟中子、光子、电子等粒子在材料中传输的蒙特卡罗代码。FIR卡通常用于模拟成像技术，如中子成像。下面是对这个程序每行代码的逐行解释：
+> 这段代码用于执行总变分正则化的图像重建。
 
-1. `function [pix4,er4] = readdata(num,ladd,oname)`
-  - 定义了一个名为`readdata`的函数，它接受三个参数：`num`（成像卡阶数），`ladd`（文件首行到数据首行预估行数），`oname`（输出卡文件名）。函数返回两个输出：`pix4`（成像卡矩阵）和`er4`（方差矩阵）。
+## 横向总结对比
+这三个文件（`RLrec(1).txt`、`TikhonovRec(1).txt`和`TVRe(1).txt`）都是MATLAB脚本或函数，它们似乎都与图像处理和重建有关，特别是与去卷积和正则化技术相关。尽管它们各自独立，但它们之间存在一些共同点和潜在的联系：
 
-2. `%readdata 函数 用于读取mcnp输出卡的FIR卡数据 mcnp5专用`
-  - 注释：说明这个函数的用途，用于读取MCNP输出文件中的FIR卡数据，特别适用于MCNP5版本。
+1. **图像重建目的**：所有文件都旨在从观测数据（可能是模糊或噪声影响的图像）中重建出清晰的图像。这通常涉及到去卷积过程，即从模糊图像中恢复出原始图像。
 
-3. `%num   成像卡阶数`
-  - 注释：解释`num`参数的意义。
+2. **正则化方法**：`TikhonovRec(1).txt`和`TVRe(1).txt`文件中提到了正则化技术。Tikhonov正则化是一种常用的方法，用于在优化问题中加入额外的约束条件，以防止过拟合。总变分（TV）正则化是一种特殊的Tikhonov正则化，它在图像处理中用于保持图像的边缘信息，同时平滑图像。
 
-4. `%ladd  文件首行到数据首行预估行数`
-  - 注释：解释`ladd`参数的意义。
+3. **迭代算法**：这些文件中的代码都使用了迭代算法来逐步改进图像重建的结果。迭代过程中，它们更新估计值（可能是图像的估计），并计算残差（即重建图像与原始图像之间的差异）。
 
-5. `%oname 读取的输出卡文件名`
-  - 注释：解释`oname`参数的意义。
+4. **自定义函数**：所有文件都调用了一些自定义函数（如`my_FFT_AX`、`PF_star`、`my_FFT_ATX`、`PG`），这些函数在代码中没有定义，但它们可能执行特定的图像处理任务，如傅里叶变换、去卷积操作或正则化步骤。
 
-6. `%pix4  输出成像卡矩阵`
-  - 注释：解释`pix4`输出的意义。
+5. **图像显示**：在迭代完成后，这些文件都包含了代码来显示重建的图像和原始图像，以及可能的残差图像。这有助于用户直观地评估重建质量。
 
-7. `%er4   输出方差矩阵`
-  - 注释：解释`er4`输出的意义。
+6. **性能评估**：这些文件中的代码计算了性能指标，如均方根误差（RMSE）和峰值信噪比（PSNR），以量化重建图像的质量。
 
-8. `str={};`
-  - 初始化一个空的字符串单元数组`str`，用于存储读取的文件行。
+7. **参数调整**：在`TikhonovRec(1).txt`和`TVRe(1).txt`中，有注释掉的代码行，这些行可能是用于调试或参数调整的。例如，`num_iter=1;` 这行代码被注释掉了，可能是为了进行单次迭代测试。
 
-9. `string1={};`
-  - 初始化一个空的字符串变量`string1`。
-
-10. `string2={};`
-  - 初始化一个空的字符串变量`string2`。
-
-11. `len='1tally  15        nps =';`
-  - 初始化一个字符串`len`，用于寻找特定的标识行。
-
-12. `lfir=0;`
-  - 初始化变量`lfir`，用于记录数据首行的行号。
-
-13. `cc=1;`
-  - 初始化计数器`cc`，用于循环读取文件。
-
-14. `dd=1;`
-  - 初始化计数器`dd`，用于寻找数据首行。
-
-15. `pix=[];`
-  - 初始化图像数据数组`pix`。
-
-16. `er=[];`
-  - 初始化方差数据数组`er`。
-
-17. `fid1=fopen(oname,'rt');`
-  - 打开指定的文件`oname`进行读取。
-
-18. `while cc<=(4*num*num+ladd)`
-  - 开始一个循环，直到读取到足够的行数。
-
-19. `line=fgets(fid1);`
-  - 从文件中读取一行。
-
-20. `str{cc}=line;`
-  - 将读取的行存储到字符串数组`str`中。
-
-21. `cc=cc+1;`
-  - 计数器`cc`递增。
-
-22. `if line<0`
-  - 如果读取到的行为空（文件结束），则跳出循环。
-
-23. `end`
-  - 结束循环。
-
-24. `while dd<=cc`
-  - 开始另一个循环，用于找到数据首行。
-
-25. `string1=str{dd};`
-  - 从字符串数组`str`中取出当前行。
-
-26. `if length(string1)>=30`
-  - 如果当前行长度大于等于30个字符。
-
-27. `string2=string1(1:23);`
-  - 提取当前行的前23个字符。
-
-28. `if strcmp(string2,len)==1`
-  - 如果提取的字符串与`len`相等。
-
-29. `lfir=dd+16;`
-  - 设置`lfir`为数据首行的行号。
-
-30. `ff=str{lfir};`
-  - 将数据首行存储到变量`ff`。
-
-31. `break`
-  - 跳出循环。
-
-32. `end`
-  - 结束循环。
-
-33. `dd=dd+1;`
-  - 计数器`dd`递增。
-
-34. `for i=1:num*num`
-  - 开始一个循环，用于读取数据并存储。
-
-35. `x=str{i*4-2+lfir};`
-  - 计算当前数据行的索引。
-
-36. `pix=[pix x(17:28)];`
-  - 从当前行中提取数据并添加到`pix`数组。
-
-37. `er=[er x(29:35)];`
-  - 从当前行中提取方差数据并添加到`er`数组。
-
-38. `end`
-  - 结束循环。
-
-39. `pix1=str2num(pix);`
-  - 将字符串数组`pix`转换为数值数组。
-
-40. `pix2=reshape(pix1,num,num);`
-  - 将一维数组`pix1`重塑为`num`乘`num`的矩阵。
-
-41. `pix3=fliplr(pix2);`
-  - 对矩阵`pix2`进行水平翻转。
-
-42. `pix4=pix3';`
-  - 对矩阵`pix3`进行转置，得到最终的`pix4`。
-
-43. `er1=str2num(er);`
-  - 将字符串数组`er`转换为数值数组。
-
-44. `er2=reshape(er1,num,num);`
-  - 将一维数组`er1`重塑为`num`乘`num`的矩阵。
-
-45. `er3=fliplr(er2);`
-  - 对矩阵`er2`进行水平翻转。
-
-46. `er4=er3';`
-  - 对矩阵`er3`进行转置，得到最终的`er4`。
-
-47. `fclose(fid1);`
-  - 关闭文件句柄`fid1`。
-
-48. `%pname=sprintf('%spix.mat',oname);`
-  - 注释：生成保存像素数据的文件名。
-
-49. `%ename=sprintf('%ser.mat',oname);`
-  - 注释：生成保存方差数据的文件名。
-
-50. `%save(pname,'pix4');`
-  - 注释：保存像素数据到文件。
-
-51. `%save(ename,'er4');`
-  - 注释：保存方差数据到文件。
-
-52. `imagesc(pix4);`
-  - 显示成像卡矩阵`pix4`。
-
-53. `end`
-  - 结束函数定义。
-
-这个函数的主要目的是`从MCNP的输出文件中提取FIR卡数据`，将其转换为`数值形式`，并进行必要的处理，以便进行`成像分析`。注释部分（以`%`开头的行）提供了额外的说明和可能的扩展功能。
+总的来说，这些文件可能是一个图像处理项目的一部分，其中包含了不同的重建策略和正则化方法。它们可能被用来比较不同方法的性能，或者作为研究不同去卷积和正则化技术的工具。
