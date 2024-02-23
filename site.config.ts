@@ -9,12 +9,12 @@ export default defineSiteConfig({
     name: '离狐千慕',
     status: {
       emoji: '🥇',
-      message: '这个烂崽不知道从哪偷的'
+      message: '这个烂崽不知道从哪偷了块金牌'
     }
   },
   favicon:"favicon.ico",
   subtitle:'木秀于林，风必摧之',
-  description: '三元及第才千倾，一品当朝禄万钟。',
+  description: '不好说不评价不知道，我只会写代码睡大觉。',
   social: [
     {
       name: 'RSS',
