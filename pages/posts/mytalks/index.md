@@ -1,5 +1,6 @@
 ---
 title: 写给高三学子们的心里话
+hide: true
 date: 2024-02-23
 updated: 2024-02-23
 categories: 生活随笔
