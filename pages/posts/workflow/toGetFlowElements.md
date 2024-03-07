@@ -121,11 +121,11 @@ public class FlowProcess {
 
 这里可以自己在process这一行打个断点看看，一个流程的定义是如何被存储和表示的，才好写代码。我在这里给一个示例的流程。这个流程应该算是单个流程里边比较复杂的了。
 
-![1709796349242](toGetFlowElements.assets/1709796349242.png)
+![1709796349242](./toGetFlowElementsImg/1709796349242.png)
 
 这个流程实际的效果图如下：
 
-![1709796461828](toGetFlowElements.assets/1709796461828.png)
+![1709796461828](./toGetFlowElementsImg/1709796461828.png)
 
 可以看到，这些基本上就是要用的元素了，其中包括：`开始事件`、`结束事件`、`用户任务`、`网关`、`子流程`、`流转路径`
 
@@ -232,7 +232,7 @@ List<FlowProcess> flowDefinitionMap=FlowElementUtil.getFlowDefinitionMap(flowEle
     private static FlowProcess getFlowProcessByFlowElement(FlowElement flowElement){
 //        获取统一的返回对象的代码
 //		  ...
-        
+
         //返回结果
         return ...;
     }
@@ -327,7 +327,7 @@ public class FlowElementStrategyExecutor {
 //        匹配到策略，执行对应的处理
         if (strategy != null) {
             return strategy.execute(flowElement);
-        } 
+        }
     }
 }
 ```
