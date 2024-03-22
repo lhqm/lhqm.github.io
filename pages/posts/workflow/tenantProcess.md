@@ -65,7 +65,7 @@ activiti官方搞什么飞机？
 ```java
 org.activiti.engine.runtime.ProcessInstance processInstance = runtimeService.
     startProcessInstanceByKeyAndTenantId(processTaskParams.getProcessKey(),
-      			businessKey, 
+      			businessKey,
                 vars,
                 processTaskParams.getTenantId() ==null?"main":processTaskParams.getTenantId());
 ```
@@ -74,7 +74,7 @@ org.activiti.engine.runtime.ProcessInstance processInstance = runtimeService.
 
 我原本以为tenantId能进去就解决了这个问题，但是当我运行测试以后我发现：
 
-![1711074696969](tenantProcess.assets/1711074696969.png)
+![1711074696969](./tenantProcess.assets/1711074696969.png)
 
 啊？
 
@@ -158,13 +158,13 @@ this.processInstanceConverter.from(this.runtimeService.createProcessInstanceBuil
 
 ### 测试
 
-![1711075621150](tenantProcess.assets/1711075621150.png)
+![1711075621150](./tenantProcess.assets/1711075621150.png)
 
 可以看到，有流程名称了！
 
 再去看看流转消息
 
-![1711075656610](tenantProcess.assets/1711075656610.png)
+![1711075656610](./tenantProcess.assets/1711075656610.png)
 
 **也可以正常工作了！**
 
