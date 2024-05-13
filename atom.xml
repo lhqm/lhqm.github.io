@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://lhqm.github.io/</id>
+    <title>狐狸小窝</title>
+    <updated>2024-05-13T07:30:27.838Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <author>
+        <name>离狐千慕</name>
+        <email>i@valaxy.site</email>
+        <uri>https://valaxy.site</uri>
+    </author>
+    <link rel="alternate" href="https://lhqm.github.io/"/>
+    <link rel="self" href="https://lhqm.github.io/atom.xml"/>
+    <subtitle>不好说不评价不知道，我只会写代码睡大觉。</subtitle>
+    <logo>https://lhqm.github.io/fox.jpg</logo>
+    <icon>https://lhqm.github.io/favicon.svg</icon>
+    <rights>CC BY-NC-SA 4.0 2024 © 离狐千慕</rights>
+    <entry>
+        <title type="html"><![CDATA[activiti 7新增处理规则——【2】后端扩展处理器选项]]></title>
+        <id>https://lhqm.github.io/posts/workflow/auditRulesBk</id>
+        <link href="https://lhqm.github.io/posts/workflow/auditRulesBk"/>
+        <updated>2024-05-13T00:00:00.000Z</updated>
+        <content type="html"><![CDATA[<h2>前言</h2>
+<p>在上一部分文档中，我们按照规则对前端进行了扩展。现在我们将从后端代码出发，进行相关功能扩展。<br>
+需要注意的是，本节涉及到的后端调用链路非常之长，请试着自己也打开调试器跟着一步一步走。</p>
+<h2></h2>
+]]></content>
+        <author>
+            <name>离狐千慕</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2024-05-13T00:00:00.000Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[区块链的定义和概念]]></title>
+        <id>https://lhqm.github.io/posts/blockChain/index</id>
+        <link href="https://lhqm.github.io/posts/blockChain/index"/>
+        <updated>2024-05-06T00:00:00.000Z</updated>
+        <content type="html"><![CDATA[<p>[[TOC]]</p>
+<h2>概述</h2>
+<p><strong>区块链（Blockchain）技术</strong>，自从在比特币（Bitcoin）白皮书`《比特币：一种点对点电子货币系统（Bitcoin: A Peerto-Peer Elect</p>
+]]></content>
+        <author>
+            <name>离狐千慕</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2024-05-06T00:00:00.000Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[activiti 7新增处理规则——【1】前端扩展处理器选项]]></title>
+        <id>https://lhqm.github.io/posts/workflow/auditRulesFr</id>
+        <link href="https://lhqm.github.io/posts/workflow/auditRulesFr"/>
+        <updated>2024-04-29T00:00:00.000Z</updated>
+        <content type="html"><![CDATA[<h2>前言</h2>
+<p>在原有的系统中，已经有了按<strong>指定审核人审核、按指定部门审核、按审核组审核、按角色审核</strong>等选项，<br>
+但是很多情况下，需要新增一些奇怪但必要的规则处理（比如说直管领导审核、一级领导审核等）。</p>
+]]></content>
+        <author>
+            <name>离狐千慕</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2024-04-29T00:00:00.000Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[为什么JDK 15废弃偏向锁]]></title>
+        <id>https://lhqm.github.io/posts/java/biasedLock</id>
+        <link href="https://lhqm.github.io/posts/java/biasedLock"/>
+        <updated>2024-04-26T00:00:00.000Z</updated>
+        <content type="html"><![CDATA[<p>在<code>JDK 1.7</code>中，引入了偏向锁的概念来优化synchronized的性能，但是偏向锁，在<code>JDK 15</code>中被废弃。</p>
+<p>JDK 15决定废弃偏向锁的主要原因是：</p>
+<p>在过去，Java 应用通常使用</p>
+]]></content>
+        <author>
+            <name>离狐千慕</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2024-04-26T00:00:00.000Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Activiti 7绕过processRuntime发起多租户流程]]></title>
+        <id>https://lhqm.github.io/posts/workflow/tenantProcess</id>
+        <link href="https://lhqm.github.io/posts/workflow/tenantProcess"/>
+        <updated>2024-03-22T00:00:00.000Z</updated>
+        <content type="html"><![CDATA[<p>昨天遇到一个棘手的问题，晚上回家躺床上想通了，今天来实践了一下，果然可行，先看思路分析：</p>
+<h2>runtimeService和processRuntime的区别</h2>
+<p>`runtimeService</p>
+]]></content>
+        <author>
+            <name>离狐千慕</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2024-03-22T00:00:00.000Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Spark程序自动顺延端口启动]]></title>
+        <id>https://lhqm.github.io/posts/clipPaste/port</id>
+        <link href="https://lhqm.github.io/posts/clipPaste/port"/>
+        <updated>2024-03-19T00:00:00.000Z</updated>
+        <content type="html"><![CDATA[<h2>前言</h2>
+<p>最近控件项目又遇到了一项难题，本来以为10000以后的端口是没有其他软件会用的了，于是乎我们的本地粘贴控件选择了10086端口进行TCP监听。</p>
+<p>但是好像<code>10086</code>这个数字比较吉利</p>
+]]></content>
+        <author>
+            <name>离狐千慕</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2024-03-19T00:00:00.000Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Activiti 7获取流程定义节点详情]]></title>
+        <id>https://lhqm.github.io/posts/workflow/toGetFlowElements</id>
+        <link href="https://lhqm.github.io/posts/workflow/toGetFlowElements"/>
+        <updated>2024-03-07T00:00:00.000Z</updated>
+        <content type="html"><![CDATA[<h2>前言</h2>
+<p>我在<a href="/posts/workflow/toQueryTask">Activiti 7获取用户审核任务节点</a><br>
+这篇文章中已经讲到过如何获取流程ID和流程实例ID，并提到了<code>流程ID</code>、`流程</p>
+]]></content>
+        <author>
+            <name>离狐千慕</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2024-03-07T00:00:00.000Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Activiti 7获取用户审核任务节点]]></title>
+        <id>https://lhqm.github.io/posts/workflow/toQueryTask</id>
+        <link href="https://lhqm.github.io/posts/workflow/toQueryTask"/>
+        <updated>2024-02-29T00:00:00.000Z</updated>
+        <content type="html"><![CDATA[<h2>前言</h2>
+<p>这是工作流模块第一篇记录，但是不一定在将来会作为第一篇入手文章以面向更多的读者。</p>
+<p>此篇记录的主要目的是关于如何获取<code>activiti 7某个流程定义的用户任务信息</code>。</p>
+<h2>获取目的</h2>
+]]></content>
+        <author>
+            <name>离狐千慕</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2024-02-29T00:00:00.000Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[http基本概念]]></title>
+        <id>https://lhqm.github.io/posts/http/index</id>
+        <link href="https://lhqm.github.io/posts/http/index"/>
+        <updated>2024-02-23T00:00:00.000Z</updated>
+        <content type="html"><![CDATA[<p><strong>提示：本文中所有图片来源于网络资源</strong></p>
+<h2>认识HTTP协议</h2>
+<p>HTTP 是一种超文本传输协议，也就是<code>H</code>yper<code>T</code>ext <code>T</code>ransfer <code>P</code>rotocol。</p>
+<p>根据HTTP的名字</p>
+]]></content>
+        <author>
+            <name>离狐千慕</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2024-02-23T00:00:00.000Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[matlab代码解释]]></title>
+        <id>https://lhqm.github.io/posts/matlab/index</id>
+        <link href="https://lhqm.github.io/posts/matlab/index"/>
+        <updated>2024-02-02T00:00:00.000Z</updated>
+        <content type="html"><![CDATA[<h2>MATLAB程序逐行比对解释</h2>
+<h3>RLrec.m</h3>
+<pre><code class="language-matlab">-- 加载名为'dianpix.mat'的MATLAB数据文件，这个文件可能包含了图像数据。
+load('dianpix</code></pre>
+]]></content>
+        <author>
+            <name>离狐千慕</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2024-02-15T00:00:00.000Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[JDK21坑点（lombok编译不通过）]]></title>
+        <id>https://lhqm.github.io/posts/java/index</id>
+        <link href="https://lhqm.github.io/posts/java/index"/>
+        <updated>2024-02-04T00:00:00.000Z</updated>
+        <content type="html"><![CDATA[<h2>问题</h2>
+<p>JDK 21的报错`NoSuchFieldError: Class com.sun.tools.javac.tree.JCTree$JCImport does not have membe</p>
+]]></content>
+        <author>
+            <name>离狐千慕</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2024-02-04T00:00:00.000Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[安全脚本签名]]></title>
+        <id>https://lhqm.github.io/posts/clipPaste/sign</id>
+        <link href="https://lhqm.github.io/posts/clipPaste/sign"/>
+        <updated>2024-01-14T00:00:00.000Z</updated>
+        <content type="html"><![CDATA[<h2>前言</h2>
+<p>在将控件打包编译为exe可安装执行程序以后，项目已经可以被正常安装并启动，但是很多人会发现一个问题，那就是<code>UAC界面报黄甚至爆红</code>，软件不能被安装，甚至不能被写入注册表。<br>
+我们这一节的</p>
+]]></content>
+        <author>
+            <name>离狐千慕</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2024-01-30T00:00:00.000Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[基于spark Java的本地化粘贴控件]]></title>
+        <id>https://lhqm.github.io/posts/clipPaste/index</id>
+        <link href="https://lhqm.github.io/posts/clipPaste/index"/>
+        <updated>2024-01-12T00:00:00.000Z</updated>
+        <content type="html"><![CDATA[<h3>项目地址</h3>
+<p><a href="https://github.com/lhqm/fox-clipbord-helper">基于spark Java的本地化粘贴控件</a></p>
+<h3>项目灵感来源</h3>
+<blockquote>
+<p>项目起源于一个实际需</p>
+</blockquote>
+]]></content>
+        <author>
+            <name>离狐千慕</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2024-01-29T00:00:00.000Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[本地化粘贴控件进一步打包为可安装程序]]></title>
+        <id>https://lhqm.github.io/posts/clipPaste/setup</id>
+        <link href="https://lhqm.github.io/posts/clipPaste/setup"/>
+        <updated>2024-01-12T00:00:00.000Z</updated>
+        <content type="html"><![CDATA[<h2>前言</h2>
+<p>在将控件打包为exe可执行程序以后，项目并不能<code>直接在用户机器上安装并启动</code>。我们的最终目的是让这个Java程序<br>
+能够像<code>原生Windows程序</code>一样被用户<code>安装</code>、<code>授权</code>、`无感知自</p>
+]]></content>
+        <author>
+            <name>离狐千慕</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2024-01-29T00:00:00.000Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[本地化粘贴控件打包为exe（适用于所有Java项目）]]></title>
+        <id>https://lhqm.github.io/posts/clipPaste/toExe</id>
+        <link href="https://lhqm.github.io/posts/clipPaste/toExe"/>
+        <updated>2024-01-12T00:00:00.000Z</updated>
+        <content type="html"><![CDATA[<h2>准备工作</h2>
+<h3>所需材料</h3>
+<ul>
+<li>项目运行所需要一起导入的<code>jre</code></li>
+<li>目标jar包</li>
+<li>exe4j（自己去下）</li>
+</ul>
+<blockquote>
+<p>需要注意，<code>jre</code>包用于在<code>没有Java环境</code>的PC上运行插件。</p>
+</blockquote>
+]]></content>
+        <author>
+            <name>离狐千慕</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2024-01-29T00:00:00.000Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Java迁移J&K混合开发]]></title>
+        <id>https://lhqm.github.io/posts/jk/index</id>
+        <link href="https://lhqm.github.io/posts/jk/index"/>
+        <updated>2023-11-02T00:00:00.000Z</updated>
+        <content type="html"><![CDATA[<h1>Java&amp;Kotlin混编与API迁移规范文档</h1>
+<p>[[TOC]]</p>
+<h2>迁移规范</h2>
+<h3>通俗约定</h3>
+<p>目标迁移语言：<code>kotlin</code></p>
+<p>目标迁移API范围：<code>Java线程池</code>、`大数据集操作</p>
+]]></content>
+        <author>
+            <name>离狐千慕</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2023-11-02T00:00:00.000Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Valaxy，我来了!]]></title>
+        <id>https://lhqm.github.io/posts/hello-valaxy</id>
+        <link href="https://lhqm.github.io/posts/hello-valaxy"/>
+        <updated>2023-09-01T00:00:00.000Z</updated>
+        <content type="html"><![CDATA[<h2>为什么选择 Valaxy</h2>
+<p>因为我懒)</p>
+<h2>有啥用</h2>
+<p>就像学术垃圾得有个知网来装，我的垃圾产出也得有个地方放不是）</p>
+<h2>站点自动化部署情况</h2>
+<p>| 节点名            | 链接</p>
+]]></content>
+        <author>
+            <name>离狐千慕</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2023-09-01T00:00:00.000Z</published>
+    </entry>
+</feed>
