@@ -20,11 +20,11 @@ top: 1
 
 ## 站点自动化部署情况
 
-| 节点名            | 链接地址                         | 物理地址 | 国内裸连 | 快速跳转                             |
-| ----------------- | -------------------------------- |------| -------- | ------------------------------------ |
-| GitHub主站        | http://lhqm.github.io            | 美国   | 不可行   | [点我跳转](http://lhqm.github.io)    |
-| CloudFire全球节点 | https://lhqm-github-io.pages.dev | 日本   | 不可行   | [点我跳转]()                         |
-| zeabur港区节点    | https://lhqm.zeabur.app/         | 香港   | 可行     | [点我跳转](https://lhqm.zeabur.app/) |
+| 节点名            | 链接地址                         | 物理地址 | 国内裸连 | 快速跳转                                     |
+| ----------------- | -------------------------------- |------| -------- |------------------------------------------|
+| GitHub主站        | http://lhqm.github.io            | 美国   | 不可行   | [点我跳转](http://lhqm.github.io)            |
+| CloudFire全球节点 | https://lhqm-github-io.pages.dev | 日本   | 不可行   | [点我跳转](https://lhqm-github-io.pages.dev) |
+| zeabur港区节点    | https://lhqm.zeabur.app/         | 香港   | 可行     | [点我跳转](https://lhqm.zeabur.app/)         |
 
 
 
