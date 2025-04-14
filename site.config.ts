@@ -5,7 +5,7 @@ export default defineSiteConfig({
   lang: 'zh-CN',
   title: '狐狸小窝',
   author: {
-    avatar: '/fox.jpg',
+    avatar: '/avatar.jpg',
     name: '离狐千慕',
     status: {
       emoji: '🥇',
